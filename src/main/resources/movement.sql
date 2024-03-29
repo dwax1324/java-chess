@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS chess DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+USE chess;
+
+
+DROP table movement;
+
+
+CREATE TABLE movement
+(
+    movement_id INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    source      VARCHAR(64) NOT NULL,
+    target      VARCHAR(64) NOT NULL,
+    shape       VARCHAR(64) NOT NULL,
+    color       VARCHAR(64) NOT NULL
+);
