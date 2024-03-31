@@ -12,10 +12,8 @@ import java.util.stream.Collectors;
 
 public class Board {
     private final Map<Position, Piece> squares;
-    private Color currentTurnColor;
 
     public Board(final Map<Position, Piece> squares) {
-        this.currentTurnColor = Color.WHITE;
         this.squares = squares;
     }
 
@@ -26,10 +24,6 @@ public class Board {
     public void move(final Position source, final Position target) {
         validateMovement(source, target);
         updateBoard(source, target);
-        if (isKingDead()) {
-            return;
-        }
-        switchTurn();
     }
 
     public double calculateScore(final Color color) {
@@ -76,7 +70,6 @@ public class Board {
         final Vector vector = new Vector(source, target);
 
         validateEmptiness(currentPiece);
-        validateCurrentTurn(currentPiece);
         validateReachability(vector, currentPiece, targetPiece);
         validateNoPieceOnPath(source, vector);
     }
@@ -112,12 +105,6 @@ public class Board {
         }
     }
 
-    private void validateCurrentTurn(final Piece currentPiece) {
-        if (!currentPiece.hasColor(currentTurnColor)) {
-            throw new IllegalArgumentException(
-                    String.format("현재 차례: %s, 현재 차례의 말만 움직일 수 있습니다", currentTurnColor.name()));
-        }
-    }
 
     private void updateBoard(final Position source, final Position target) {
         squares.put(target, squares.get(source).move());
@@ -129,23 +116,14 @@ public class Board {
         return squares.values().stream().filter(Piece::isKing).count() != 2;
     }
 
-    public boolean isKingDeadOf(final Color color) {
-        return squares.values()
-                .stream()
-                .filter(Piece::isKing)
-                .map(Piece::getColor)
-                .noneMatch(r -> r.isSameColor(color));
-    }
-
-
-    private void switchTurn() {
-        currentTurnColor = currentTurnColor.reverse();
-    }
-
-    public Color getColor() {
-        return this.currentTurnColor;
-    }
-
+//    public boolean isKingDeadOf(final Color color) {
+//        return squares.values()
+//                .stream()
+//                .filter(Piece::isKing)
+//                .map(Piece::getColor)
+//                .noneMatch(r -> r.isSameColor(color));
+//    }
+//
     public Piece getPiece(final String source) {
         return squares.get(Position.from(source));
     }
