@@ -10,6 +10,6 @@ class JdbcConnectorTest {
     @Test
     @DisplayName("Jdbc가 연결되었는지 확인한다")
     void getConnection() {
-        assertThatCode(() -> new JdbcConnector().getConnection()).doesNotThrowAnyException();
+        assertThatCode(() -> JdbcConnector.getMysqlConnection()).doesNotThrowAnyException();
     }
 }

@@ -33,10 +33,14 @@ public class Board {
     }
 
     public double calculateScore(final Color color) {
-        final List<Piece> pieces = squares.values().stream().filter(piece -> piece.hasColor(color)).toList();
+        final List<Piece> pieces = getPiecesBy(color);
         double totalSCore = calculateWithoutPawnScore(color, pieces);
         totalSCore += calculatePawnScore(color);
         return totalSCore;
+    }
+
+    private List<Piece> getPiecesBy(final Color color) {
+        return squares.values().stream().filter(piece -> piece.hasColor(color)).toList();
     }
 
     private double calculateWithoutPawnScore(final Color color, final List<Piece> pieces) {

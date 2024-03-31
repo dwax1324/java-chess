@@ -1,8 +1,5 @@
 package domain;
 
-import static domain.board.position.File.*;
-import static domain.board.position.Rank.*;
-
 import domain.board.position.Position;
 
 public class PositionFixture {

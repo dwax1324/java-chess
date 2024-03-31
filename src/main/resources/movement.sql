@@ -7,11 +7,14 @@ USE chess;
 DROP table movement;
 
 
+
 CREATE TABLE movement
 (
-    movement_id INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    movement_id INT         NOT NULL AUTO_INCREMENT,
     source      VARCHAR(64) NOT NULL,
     target      VARCHAR(64) NOT NULL,
     shape       VARCHAR(64) NOT NULL,
-    color       VARCHAR(64) NOT NULL
+    color       VARCHAR(64) NOT NULL,
+
+    PRIMARY KEY (movement_id)
 );

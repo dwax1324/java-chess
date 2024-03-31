@@ -1,9 +1,8 @@
 package domain.board.position;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class Position implements Serializable {
+public class Position {
     private final File file;
     private final Rank rank;
 

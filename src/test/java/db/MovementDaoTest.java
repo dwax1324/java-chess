@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 
 class MovementDaoTest {
 
-    private final MovementDao movementDao = new MovementDao();
+    private final MovementDao movementDao = new MovementDao(JdbcConnector.getMysqlConnection());
+
     @BeforeEach
-    void setUp(){
+    void setUp() {
         movementDao.deleteAll();
     }
+
     @Test
     @DisplayName("움직임이 잘 만들어지는지 확인한다")
     void createMovement() {
