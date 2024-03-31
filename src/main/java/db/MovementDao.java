@@ -24,7 +24,7 @@ public final class MovementDao {
             preparedStatement.setString(4, movement.color());
             preparedStatement.executeUpdate();
         } catch (final SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -43,7 +43,7 @@ public final class MovementDao {
             }
             return movements;
         } catch (final SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -52,7 +52,7 @@ public final class MovementDao {
         try (final var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (final SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 }

@@ -2,6 +2,8 @@ package service;
 
 import db.Movement;
 import db.MovementDao;
+import domain.board.Board;
+import domain.board.BoardInitiator;
 import domain.board.position.Position;
 import java.sql.Connection;
 import java.util.List;
@@ -24,7 +26,21 @@ public class ChessService {
     }
 
     public boolean isRunning() {
-        return movementDao.isRunning;
+        final List<Movement> positions = movementDao.findAll();
+        final Board board = new Board(BoardInitiator.init());
+        for (final var movement : positions) {
+            board.move(movement.source(), movement.target());
+        }
+        return !board.isKingDead();
+    }
+
+    public Board getBoard() {
+        final List<Movement> positions = movementDao.findAll();
+        final Board board = new Board(BoardInitiator.init());
+        for (final var movement : positions) {
+            board.move(movement.source(), movement.target());
+        }
+        return board;
     }
 
 //    public void execute(final String value) {

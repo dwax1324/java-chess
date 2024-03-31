@@ -17,10 +17,10 @@ public class ChessController {
 
     public void start() {
         final ChessService chessService = new ChessService(connection);
-
+        String command;
         while (true) {
             try {
-                final String command = InputView.inputCommand();
+                command = InputView.inputCommand();
                 if (command.equals("end")) {
                     break;
                 }

@@ -6,13 +6,9 @@ import java.util.regex.Pattern;
 
 public enum HandlerMapper {
 
-    START(Pattern.compile("start"), new StartHandler()),
-    STATUS(Pattern.compile("status"), new StatusHandler()),
-    MOVE(Pattern.compile("move ([a-h][0-8]) ([a-h][0-8])"), new MoveHandler()),
-
-    END(Pattern.compile("end"), new EndHandler()),
-    ;
-
+    START(Pattern.compile("start"), new StartHandler()), STATUS(Pattern.compile("status"), new StatusHandler()), MOVE(
+            Pattern.compile("move ([a-h][0-8]) ([a-h][0-8])"), new MoveHandler()), END(Pattern.compile("end"),
+            new EndHandler());
     private final Pattern pattern;
     private final CommandHandler commandHandler;
 
@@ -30,3 +26,4 @@ public enum HandlerMapper {
                 .orElseThrow(() -> new NoSuchElementException(String.format("찾으려는 커맨드: %s,가 존재하지 않습니다.", rawCommand)));
     }
 }
+

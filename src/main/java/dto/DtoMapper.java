@@ -1,5 +1,6 @@
 package dto;
 
+import domain.board.Board;
 import domain.board.position.Position;
 import domain.piece.Piece;
 import java.util.ArrayList;
@@ -21,10 +22,10 @@ public class DtoMapper {
         return new GameResultResponse(whiteScore, blackScore, isWhiteKingDead, isBlackKingDead);
     }
 
-    public static BoardResponse generateBoardResponse(final Map<Position, Piece> squares) {
+    public static BoardResponse generateBoardResponse(final Board board) {
         final List<RankResponse> rankResponses = new ArrayList<>();
         for (int rank = 7; rank >= 0; rank--) {
-            final RankResponse pieceShapeOfRank = DtoMapper.generateRankResponse(squares, rank);
+            final RankResponse pieceShapeOfRank = DtoMapper.generateRankResponse(board.getSquares(), rank);
             rankResponses.add(pieceShapeOfRank);
         }
         return new BoardResponse(rankResponses);
