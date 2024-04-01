@@ -6,6 +6,12 @@
 
 - [온라인 코드 리뷰 과정](https://github.com/woowacourse/woowacourse-docs/blob/master/maincourse/README.md)
 
+# Docker 실행하기
+docker-compose -p chess up -d
+
+# Docker 정지하기
+docker-compose -p chess down
+
 ## 구현 기능 목록
 
 ### Color
