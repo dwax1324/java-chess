@@ -60,10 +60,10 @@ class BoardTest {
     @DisplayName("현재 차례가 아니라면 예외가 발생한다")
     void turn() {
         final Board board = new Board(BoardInitiator.init());
-        board.move(B_TWO, B_THREE);
+        final ChessGame chessGame = new ChessGame(new BoardAdaptor(board));
 
-        assertThatThrownBy(() -> board.move(B_THREE, B_FOUR)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("현재 차례: BLACK, 현재 차례의 말만 움직일 수 있습니다");
+        assertThatThrownBy(() -> chessGame.move("b7", "b5")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("현재 차례: WHITE, 현재 차례의 말만 움직일 수 있습니다");
     }
 
     @Test

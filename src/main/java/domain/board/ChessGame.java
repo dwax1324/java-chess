@@ -8,17 +8,19 @@ public class ChessGame implements Observable<Piece> {
 
     private final BoardAdaptor board;
     private Color activeColor;
-    private boolean finished;
+    boolean isKingDead;
 
     public ChessGame(final BoardAdaptor board) {
         this.board = board;
         this.activeColor = Color.WHITE;
-        this.finished = false;
+        isKingDead = false;
+        board.subscribe(this);
     }
 
+
     public void move(final String source, final String target) {
-        if (finished) {
-            throw new IllegalCallerException("게임이 종료되어 더이상 움직일 수 없습니다");
+        if (isKingDead) {
+            throw new IllegalCallerException("진행 중인 게임이 아닙니다.");
         }
         validateCurrentColor(board.getPiece(source));
         board.move(source, target);
@@ -31,6 +33,10 @@ public class ChessGame implements Observable<Piece> {
         }
     }
 
+    public boolean isKingDead() {
+        return isKingDead;
+    }
+
     public Color getColor() {
         return this.activeColor;
     }
@@ -38,9 +44,21 @@ public class ChessGame implements Observable<Piece> {
     @Override
     public void update(final Piece piece) {
         if (piece.isKing()) {
-            finished = true;
+            isKingDead = true;
             return;
         }
         activeColor = activeColor.reverse();
+    }
+
+    public Piece getPiece(final String target) {
+        return board.getPiece(target);
+    }
+
+    public Double calculateScore(final Color color) {
+        return board.calculateScore(color);
+    }
+
+    public boolean isKingDeadOf(final Color color) {
+        return board.isKingDeadOf(color);
     }
 }

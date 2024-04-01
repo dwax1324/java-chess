@@ -3,6 +3,7 @@ package domain.piece;
 
 import static domain.PositionFixture.A_ONE;
 import static domain.PositionFixture.A_TWO;
+import static domain.piece.Color.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.board.position.Vector;

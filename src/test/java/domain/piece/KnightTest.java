@@ -9,6 +9,7 @@ import static domain.PositionFixture.E_SIX;
 import static domain.PositionFixture.E_TWO;
 import static domain.PositionFixture.F_FIVE;
 import static domain.PositionFixture.F_THREE;
+import static domain.piece.Color.BLACK;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 

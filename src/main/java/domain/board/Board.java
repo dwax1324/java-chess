@@ -18,7 +18,8 @@ public class Board {
     }
 
     public void move(final String source, final String target) {
-        move(Position.from(source), Position.from(target));
+        move(Position.from(String.valueOf(source.charAt(0)), String.valueOf(source.charAt(1))),
+                Position.from(String.valueOf(target.charAt(0)), String.valueOf(target.charAt(1))));
     }
 
     public void move(final Position source, final Position target) {
@@ -112,21 +113,22 @@ public class Board {
 
     }
 
-    public boolean isKingDead() {
-        return squares.values().stream().filter(Piece::isKing).count() != 2;
+    public boolean isKingDeadOf(final Color color) {
+        return squares.values()
+                .stream()
+                .filter(Piece::isKing)
+                .map(Piece::getColor)
+                .noneMatch(r -> r.isSameColor(color));
     }
 
-//    public boolean isKingDeadOf(final Color color) {
-//        return squares.values()
-//                .stream()
-//                .filter(Piece::isKing)
-//                .map(Piece::getColor)
-//                .noneMatch(r -> r.isSameColor(color));
-//    }
-//
     public Piece getPiece(final String source) {
-        return squares.get(Position.from(source));
+        return squares.get(Position.from(String.valueOf(source.charAt(0)), String.valueOf(source.charAt(1))));
     }
+
+    public Piece getPiece(final Position source) {
+        return squares.get(source);
+    }
+
 
     public Map<Position, Piece> getSquares() {
         return Collections.unmodifiableMap(squares);
