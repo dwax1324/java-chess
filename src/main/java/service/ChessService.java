@@ -19,10 +19,6 @@ public class ChessService {
         this.movementDaoImpl = new MovementDaoImpl(connection);
     }
 
-    public ChessService(final MovementDao movementDaoImpl) {
-        this.movementDaoImpl = movementDaoImpl;
-    }
-
     public boolean isRunning() {
         final ChessGame chessGame = getGame();
         return !chessGame.isKingDead();

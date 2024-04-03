@@ -18,8 +18,8 @@ public final class MovementDaoImpl implements MovementDao {
 
         final var query = "INSERT INTO movement (source,  target, shape, color) values(?, ?, ?, ?)";
         try (final var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, movement.source().toString());
-            preparedStatement.setString(2, movement.target().toString());
+            preparedStatement.setString(1, movement.source().toFileName() + movement.source().toRankIndex());
+            preparedStatement.setString(2, movement.target().toFileName() + movement.target().toRankIndex());
             preparedStatement.setString(3, movement.shape());
             preparedStatement.setString(4, movement.color());
             preparedStatement.executeUpdate();

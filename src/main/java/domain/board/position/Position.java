@@ -30,10 +30,8 @@ public class Position {
         return rank.toIndex();
     }
 
-
-    @Override
-    public String toString() {
-        return file.name().toLowerCase() + (rank.toIndex() + 1);
+    public String toFileName() {
+        return file.name().toLowerCase();
     }
 
     @Override
