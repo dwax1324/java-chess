@@ -18,14 +18,17 @@ public final class MovementDaoImpl implements MovementDao {
 
         final var query = "INSERT INTO movement (source,  target, shape, color) values(?, ?, ?, ?)";
         try (final var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, movement.source().toFileName() + movement.source().toRankIndex());
-            preparedStatement.setString(2, movement.target().toFileName() + movement.target().toRankIndex());
+            preparedStatement.setString(1,
+                    movement.source().toFileName().toLowerCase() + (movement.source().toRankIndex() + 1));
+            preparedStatement.setString(2,
+                    movement.target().toFileName().toLowerCase() + (movement.target().toRankIndex() + 1));
             preparedStatement.setString(3, movement.shape());
             preparedStatement.setString(4, movement.color());
             preparedStatement.executeUpdate();
         } catch (final SQLException e) {
             throw new IllegalStateException(e);
         }
+
     }
 
     public List<Movement> findAll() {

@@ -31,7 +31,7 @@ public class Position {
     }
 
     public String toFileName() {
-        return file.name().toLowerCase();
+        return file.name();
     }
 
     @Override

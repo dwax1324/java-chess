@@ -28,7 +28,8 @@ public class ChessService {
         final List<Movement> positions = movementDaoImpl.findAll();
         final ChessGame game = new ChessGame(new BoardAdaptor(new Board(BoardInitiator.init())));
         for (final var movement : positions) {
-            game.move(movement.source().toString(), movement.target().toString());
+            game.move(movement.source().toFileName().toLowerCase() + (movement.source().toRankIndex() + 1),
+                    movement.target().toFileName().toLowerCase() + (movement.target().toRankIndex() + 1));
         }
         return game;
     }
@@ -37,8 +38,10 @@ public class ChessService {
         final ChessGame game = getGame();
         game.move(source, target);
         movementDaoImpl.createMovement(
-                new Movement(Position.from(String.valueOf(source.charAt(0)), String.valueOf(source.charAt(1))),
-                        Position.from(String.valueOf(target.charAt(0)), String.valueOf(target.charAt(1))),
+                new Movement(Position.from(String.valueOf(source.charAt(0)),
+                        String.valueOf(Character.getNumericValue(source.charAt(1)))),
+                        Position.from(String.valueOf(target.charAt(0)),
+                                String.valueOf(Character.getNumericValue(target.charAt(1)))),
                         game.getPiece(target).getClass().getSimpleName(), game.getPiece(target).getColor().name()));
     }
 
